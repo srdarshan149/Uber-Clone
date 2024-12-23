@@ -32,7 +32,6 @@ module.exports.registerUser = async (req, res, next) => {
     res.status(201).json({ token, user });
 };
 
-
 module.exports.loginUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -44,8 +43,6 @@ module.exports.loginUser = async (req, res, next) => {
     // console.log(req.body);
     const user = await userModel.findOne({ email }).select('+password');
 
-    
-
     // const user = await userModel.findOne({ email });
     if (!user) {
         return res.status(401).json({ message: 'Invalid email or password' });
@@ -53,7 +50,6 @@ module.exports.loginUser = async (req, res, next) => {
 
     const isPasswordMatch = await bcryptjs.compare(password, user.password);
     // console.log(isPasswordMatch,"password");
-    
     if (!isPasswordMatch) {
         return res.status(401).json({ message: 'Invalid email or password ' });
     }
@@ -67,11 +63,12 @@ module.exports.loginUser = async (req, res, next) => {
     );
 
     res.status(200).json({ token, user });
-}
+};
+
 module.exports.getUserProfile = async (req, res, next) => {
     //  const user = await userModel.findById(req.user._id);
     res.status(200).json(req.user);
-}
+};
 
 module.exports.logoutUser = async (req, res, next) => {
     res.clearCookie('token');
@@ -79,4 +76,4 @@ module.exports.logoutUser = async (req, res, next) => {
 
     await backlistTokenModel.create({token});
     res.status(200).json({ message: 'Logout successfully' });
-}
+};
