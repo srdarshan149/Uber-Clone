@@ -5,9 +5,12 @@ const cors =require('cors');
 const app = express();
 const connectTODB =require('./DB/db')
 const  userRouter= require('./routes/user.routes')
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const cookieParser = require('cookie-parser');
 connectTODB()
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
+
 
  app.use(cors());
 app.get('/',(req,res)=>{
