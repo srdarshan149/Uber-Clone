@@ -113,7 +113,26 @@ This repository contains the backend implementation for the Uber Clone project, 
   }
   ```
 
+- **GET /api/users/profile**: Retrieve user profile (requires authentication).
 
+  **Response:**
+  ```json
+  {
+    "_id": "user_id",
+    "firstname": "John",
+    "lastname": "Doe",
+    "email": "john.doe@example.com"
+  }
+  ```
+
+- **GET /api/users/logout**: Log out the current user (requires authentication).
+
+  **Response:**
+  ```json
+  {
+    "message": "Logout successfully"
+  }
+  ```
 
 ## Contributing
 
