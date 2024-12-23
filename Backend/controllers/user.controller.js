@@ -1,6 +1,8 @@
 const userModel = require('../models/user.model')
-const userservice = require('../services/user.service') 
+const userservice = require('../services/user.service')
 const {validationResult} =require('express-validator')
+const bcryptjs = require('bcryptjs')
+
 
 // module.exports.registerUser =async (req,res,next)=>{
 
@@ -27,8 +29,9 @@ const {validationResult} =require('express-validator')
 //             }
 
 
-module.exports.registerUser = async (req, res, next) => {
 
+
+module.exports.registerUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -37,23 +40,21 @@ module.exports.registerUser = async (req, res, next) => {
     const { fullname, email, password } = req.body;
 
     const isUserAlready = await userModel.findOne({ email });
-
     if (isUserAlready) {
-        return res.status(400).json({ message: 'User already exist' });
+        return res.status(400).json({ message: 'User already exists' });
     }
 
-    const hashedPassword = await userModel.hashPassword(password);
+    const salt = await bcryptjs.genSalt(10);
+    const hashedPassword = await bcryptjs.hash(password, salt);
 
     const user = await userservice.createUser({
         firstname: fullname.firstname,
         lastname: fullname.lastname,
         email,
-        password: hashedPassword
+        password: hashedPassword,
     });
 
     const token = user.generateAuthToken();
 
     res.status(201).json({ token, user });
-
-
-}
+};

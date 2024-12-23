@@ -5,7 +5,8 @@ const cors =require('cors');
 const app = express();
 const connectTODB =require('./DB/db')
 const  userRouter= require('./routes/user.routes')
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 connectTODB()
 
  app.use(cors());

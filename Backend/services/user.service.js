@@ -29,5 +29,8 @@ module.exports.createUser = async ({
         password
     })
 
+    // console.log(user);
+    
+
     return user;
 }
