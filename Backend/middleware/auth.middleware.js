@@ -5,7 +5,7 @@ const BlacklistToken = require("../models/blacklistToken.model");
 
 module.exports.authuser = async (req, res, next) => {
   const tokan = req.cookies.token || req.headers.authorization?.split(" ")[1];
-  console.log(tokan);
+  console.log(tokan);    
   if (!tokan) {
     return res.status(401).json({ message: "Unauthorized" });
   }

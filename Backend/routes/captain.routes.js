@@ -13,4 +13,10 @@ router.post('/register', [
     body('vehicle.capacity').isLength({ min: 1 }).withMessage('Capacity must be at least 1'),
     body('vehicle.vehicleType').isIn(['car', 'motorcycle', 'auto']).withMessage('Invalid Vehicle Type'),
 ], Captaincontroller.registerCaptain);
+
+router.post('/login', [
+    body('email').isEmail().withMessage('Invalid Email'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+], Captaincontroller.loginCaptain);
+
 module.exports = router;
