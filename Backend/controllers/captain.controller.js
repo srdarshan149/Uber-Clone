@@ -26,5 +26,8 @@ module.exports.registerCaptain = async (req, res, next) => {
         capacity: vehicle.capacity,
         vehicleType: vehicle.vehicleType
     });
+    // console.log(captain);
+    res.status(201).json({ message:"captain successfully Add" });
+    
 
 }

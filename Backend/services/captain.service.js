@@ -19,6 +19,8 @@ module.exports.createCaptain = async ({
             capacity,
             vehicleType
         }
-    });
+      });
+      // console.log(captain);
+    
     return captain;
 }

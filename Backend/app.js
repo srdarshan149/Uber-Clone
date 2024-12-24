@@ -7,6 +7,7 @@ const connectTODB =require('./DB/db')
 const  userRouter= require('./routes/user.routes')
 const  captainRoutes  = require('./routes/captain.routes')
 const cookieParser = require('cookie-parser');
+
 connectTODB()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
